@@ -14,6 +14,13 @@ var randomNumber = function(min, max) {
 // fight function (now with parameter for enemy's name)
 var fight = function(enemy) {
 
+    //keep track of who goes first
+    var isPlayerTurn = true;
+
+        if (Math.random() > 0.5) {
+            isPlayerTurn = false;
+        }
+
     
     
     
@@ -48,6 +55,7 @@ var fight = function(enemy) {
       return false;
         }
         while (playerInfo.health > 0 && enemy.health > 0) {
+            if (isPlayerTurn) {
             if (fightOrSkip()) {
                 break;
             }
@@ -67,13 +75,14 @@ var fight = function(enemy) {
         window.alert(enemy.name + ' has died!');
   
         // award player money for winning
-        playerInfo.money = Math.max(0, playerInfo.money + 10);
+        playerInfo.money = playerInfo.money + 20;
   
         // leave while() loop since enemy is dead
         break;
       } else {
         window.alert(enemy.name + ' still has ' + enemy.health + ' health left.');
       }
+    }else {
   
       // remove players's health by subtracting the amount set in the enemy.attack variable
       // generate random damage value based on player's attack power
@@ -92,6 +101,8 @@ var fight = function(enemy) {
       } else {
         window.alert(playerInfo.name + ' still has ' + playerInfo.health + ' health left.');
       }
+    }
+      isPlayerTurn = !isPlayerTurn;
     }
   };
   
@@ -179,7 +190,7 @@ var fight = function(enemy) {
         
 
                 //use switch to carry out action
-                    debugger
+                    //debugger
                     switch (shopOptionPrompt) {
                         case 1:
                         playerInfo.refillHealth();
@@ -264,5 +275,3 @@ var fight = function(enemy) {
   
   //start the game when the page loads
   startGame();
-
-  
